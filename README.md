@@ -2,6 +2,7 @@
 
 # Installation #
 composer create-project --prefer-dist laravel/laravel laravel-oauth-server
+composer install
 
 # Features #
 API Authentication (Passport)
