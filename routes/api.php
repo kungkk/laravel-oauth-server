@@ -18,30 +18,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-//Route::middleware('client')->get('/articles', function (Request $request) {
 Route::middleware('client')->get('/articles', function (Request $request) {    
     // working code
     //$dataset = DB::table('oauth_access_tokens')->get();
     
-    //$dataset = DB::table('oauth_access_tokens')->where('client_id', 3)->get();
     $dataset = DB::table('oauth_access_tokens')->where('client_id', $request->oauth_client_id)->get();
     
     return $dataset->toJson();
-    
-    return $request->oauth_client_id;
-    //return $request->oauth_id;
-    
-    //return $request->user();
-
 });
-
 
 // working code
 //Route::get('/articles', function (Request $request) {
 //    return 'ff';
 //})->middleware('client');
 
+Route::get('/client_credentials-client_id', function (Request $request) {    
+    return "oauth_client_id:" . $request->oauth_client_id;
+})->middleware('client');
 
-//Route::get('/articles', function (Request $request) {
-//    return 'ff';
-//});
+
+
+Route::get('/password_grant-user_id', function (Request $request) {    
+    return "user_id:" . Auth::user()->id;
+})->middleware('auth:api');
